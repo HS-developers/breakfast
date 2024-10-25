@@ -136,8 +136,8 @@ async function displayOrders() {
 
 // دالة إلغاء الطلبات
 async function clearAllOrders() {
-    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
-    if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
+    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟");
+    if (!confirmation) return;
 
     const name = document.getElementById("nameInput").value; // الحصول على اسم المستخدم
     if (!name) {
@@ -149,6 +149,7 @@ async function clearAllOrders() {
     querySnapshot.forEach(async (doc) => {
         try {
             await deleteDoc(doc.ref); // حذف الطلب
+            
             // سجل اسم المستخدم الذي قام بالحذف في مجموعة جديدة "actionLogs"
             await addDoc(collection(db, "actionLogs"), {
                 name: name,
@@ -207,6 +208,30 @@ function toggleSections(sectionToShow) {
     });
 }
 
+async function displayActionLogs() {
+    const logsOutput = document.getElementById("logsOutput");
+    logsOutput.innerHTML = ''; // مسح المحتوى القديم
+
+    const querySnapshot = await getDocs(collection(db, "actionLogs"));
+    if (querySnapshot.empty) {
+        logsOutput.innerHTML = '<p>لا توجد سجلات حالياً.</p>';
+        return;
+    }
+
+    querySnapshot.forEach(doc => {
+        const log = doc.data();
+        const logDiv = document.createElement("div");
+        logDiv.innerHTML = `
+            <p><strong>الاسم:</strong> ${log.name}</p>
+            <p><strong>الحدث:</strong> ${log.action}</p>
+            <p><strong>التاريخ والوقت:</strong> ${log.timestamp.toDate().toLocaleString()}</p>
+            <hr>
+        `;
+        logsOutput.appendChild(logDiv);
+    });
+}
+
+
 // إضافة أحداث للأزرار
 document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
 document.getElementById("viewOrdersButton").addEventListener("click", () => {
@@ -218,3 +243,5 @@ document.getElementById("viewIndividualOrdersButton").addEventListener("click", 
     displayIndividualOrders();
 });
 document.getElementById("clearAllOrdersButton").addEventListener("click", clearAllOrders);
+document.getElementById("viewLogsButton").addEventListener("click", displayActionLogs);
+
