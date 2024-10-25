@@ -30,9 +30,11 @@ function login() {
             const user = userCredential.user;
             console.log('User logged in:', user);
             alert("تم تسجيل الدخول بنجاح!");
-            // إظهار قسم الطلبات بعد تسجيل الدخول
-            document.getElementById("loginSection").style.display = "none";
-            document.getElementById("orderSection").style.display = "block";
+            // إضافة التحقق من العنصر
+            const ordersSection = document.getElementById("ordersSection");
+            if (ordersSection) {
+                ordersSection.style.display = "block"; // عرض قسم الطلبات بعد تسجيل الدخول
+            }
         })
         .catch((error) => {
             const errorCode = error.code;
