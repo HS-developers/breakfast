@@ -5,91 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lets Breakfast</title>
     <style>
+        /* نفس التنسيقات السابقة */
         body {
             font-family: 'Cairo', sans-serif;
             margin: 20px;
-            direction: rtl; /* لتنسيق النصوص باللغة العربية */
-            background: linear-gradient(to bottom right, #e90606, #c28282, #001008f9); /* تدرج متناسق مع اللون الأخضر */
-            color: #abf6b9; /* لون النص */
+            direction: rtl;
+            background: linear-gradient(to bottom right, #e90606, #c28282, #001008f9);
+            color: #abf6b9;
         }
         header {
-            background: linear-gradient(135deg, #0a0a0a, #404041); /* تدرج لوني */
+            background: linear-gradient(135deg, #0a0a0a, #404041);
             color: white;
             padding: 20px;
-            box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925); /* تأثير الظل لإعطاء مظهر ثلاثي الأبعاد */
-            border-radius: 16px; /* زوايا مستديرة */
+            box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925);
+            border-radius: 16px;
             text-align: right;
         }
         h1 {
             margin: 20px;
             text-align: center;
-            color: rgb(40, 206, 76); /* لون العنوان */
-            font-size: 28px; /* زيادة حجم خط العنوان */
+            color: rgb(40, 206, 76);
+            font-size: 28px;
         }
         .name-section {
-            margin-top: 20px; /* مسافة من الأعلى */
-            text-align: right; /* محاذاة النص في اليمين */
+            margin-top: 20px;
+            text-align: right;
         }
         .name-input {
-            padding: 10px; /* مساحة داخلية */
-            border: 2px solid #2c2b2b; /* حدود العنصر */
-            border-radius: 30px; /* زوايا مستديرة */
-            font-size: 16px; /* حجم الخط */
-            background-color: #f3e011; /* لون الخلفية   */
-            color: #131212; /* لون النص أبيض */
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل لإعطاء مظهر ثلاثي الأبعاد */
-            border: 1px solid #004d00; /* حدود داكنة لإبراز التأثير */
+            padding: 10px;
+            border: 2px solid #2c2b2b;
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: #f3e011;
+            color: #131212;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            border: 1px solid #004d00;
         }
-        
         h2 {
-            color: rgb(255, 255, 255); /* لون العنوان */
-            font-size: 28px; /* زيادة حجم خط العنوان */
+            color: rgb(255, 255, 255);
+            font-size: 28px;
         }
         .order-form {
             display: flex;
-            flex-wrap: wrap; /* يسمح بتغليف العناصر في الصفوف */
-            margin-bottom: 20px; /* مسافة أسفل النموذج */
-            gap: 10px; /* إزالة الفجوات بين العناصر */
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 10px;
         }
         label {
-            flex-basis: 75%; /* كل عنصر يأخذ 75% من عرض السطر */
-            text-align: right; /* محاذاة النص إلى اليمين */
-            margin: 5px 0; /* مساحة صغيرة حول العناصر */
-            font-size: 22px; /* زيادة حجم الخط */
+            flex-basis: 75%;
+            text-align: right;
+            margin: 5px 0;
+            font-size: 22px;
         }
-        input[type="number"], input[type="text"] {
-            flex-basis: 50%; /* كل إدخال يأخذ 50% من عرض السطر */
+        input[type="number"], input[type="text"], input[type="email"], input[type="password"] {
+            flex-basis: 50%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            text-align: center; /* محاذاة النص إلى الوسط */
-            margin: 5px 0; /* فقط مسافة عمودية */
-            font-size: 22px; /* زيادة حجم الخط */
+            text-align: center;
+            margin: 5px 0;
+            font-size: 22px;
         }
         button {
             padding: 10px 15px;
             margin: 5px 0;
-            background-color: #793305; /* لون زر الإرسال */
+            background-color: #793305;
             color: white;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 20px; /* زيادة حجم الخط */
+            font-size: 20px;
         }
         button:hover {
-            background-color: #45a049; /* لون الزر عند التمرير */
+            background-color: #45a049;
         }
-
         .note {
             font-size: 20px;
             color: rgb(245, 241, 7);
             text-align: center;
             margin-top: 20px;
-            border: 2px solid blue; /* إضافة برواز أزرق */
-            padding: 10px; /* إضافة مساحة داخلية */
-            border-radius: 8px; /* زوايا مستديرة */
+            border: 2px solid blue;
+            padding: 10px;
+            border-radius: 8px;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -99,41 +97,35 @@
             padding: 10px;
             border: 1px solid #ccc;
             text-align: center;
-            font-size: 22px; /* زيادة حجم الخط */
+            font-size: 22px;
         }
         th {
-            background-color: rgba(46, 45, 45, 0.8); /* لون رأس الجدول مع شفافية */
+            background-color: rgba(46, 45, 45, 0.8);
         }
-
-        /* إخفاء قسم الطلب المجمع عند تحميل الصفحة */
         #ordersSection, #individualOrdersSection {
             display: none;
         }
-        
-        /* تنسيق خاص لزر مسح البيانات المخزنة */
         #clearAllOrdersButton {
-            background-color: #ff0000; /* لون الخلفية */
-            color: rgb(245, 241, 7); /* لون النص */
-            border: 2px solid #8b0000; /* حدود داكنة */
-            border-radius: 8px; /* زوايا مستديرة */
-            font-weight: bold; /* خط عريض */
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل */
+            background-color: #ff0000;
+            color: rgb(245, 241, 7);
+            border: 2px solid #8b0000;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
         #clearAllOrdersButton:hover {
-            background-color: #ff4d4d; /* لون الخلفية عند التمرير */
+            background-color: #ff4d4d;
         }
-
         footer {
             margin-top: 20px;
             text-align: right;
         }
-
     </style>
     <script type="module" src="app.js"></script>
 </head>
 <body>
     <header>
-        <h1>🍔 ما تيجوا نفطر 🍔</h1>
+        <h1>🍔 ما تيجوا نفطر  🍔</h1>
         <div class="name-section">
             <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required>
         </div>
@@ -143,7 +135,7 @@
     <div id="login">
         <input type="email" id="email" placeholder="البريد الإلكتروني">
         <input type="password" id="password" placeholder="كلمة المرور">
-        <button onclick="login()">تسجيل الدخول</button>
+        <button id="loginButton">تسجيل الدخول</button>
     </div>
     
     <h2>أصناف الطلب</h2>
