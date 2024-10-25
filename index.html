@@ -132,38 +132,38 @@
     <script type="module" src="app.js"></script>
 </head>
 <body>
-
     <header>
         <h1>🍔 ما تيجوا نفطر  🍔</h1>
         <div class="name-section">
-        <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required>
-    </div>
+            <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required>
+        </div>
     </header>
-        
-    <h2>أصناف الطلب</h2>
     
+    <h2>تسجيل الدخول</h2>
+    <div id="login">
+        <input type="text" id="phoneNumber" placeholder="رقم الهاتف">
+        <div id="recaptcha-container"></div>
+        <button onclick="sendVerificationCode()">إرسال رمز التحقق</button>
+        <input type="text" id="verificationCode" placeholder="رمز التحقق">
+        <button onclick="verifyCode()">تحقق من الرمز</button>
+    </div>
+    
+    <h2>أصناف الطلب</h2>
     <div class="order-form">
         <label for="foulInput">فول <img src="فول.jfif" alt="فول" style="width: 70px; height: 35px;"></label>
         <input id="foulInput" type="number" min="0">
-        
         <label for="ta3miyaInput">طعمية <img src="طعمية2.jpg" alt="طعمية" style="width: 70px; height: 35px;"></label>
         <input id="ta3miyaInput" type="number" min="0">
-        
         <label for="batatisTawabi3Input">بطاطس صوابع <img src="بطاطس صوابع.jfif" alt="بطاطس صوابع" style="width: 70px; height: 35px;"></label>
         <input id="batatisTawabi3Input" type="number" min="0">
-        
         <label for="batatisShibsyInput">بطاطس شيبسي <img src="بطاطس شيبسي.jpg" alt="بطاطس شيبسي" style="width: 70px; height: 35px;"></label>
         <input id="batatisShibsyInput" type="number" min="0">
-        
         <label for="ta3miyaMahshyInput">طعمية محشية <img src="طعمية محشية.jpg" alt="طعمية محشية" style="width: 70px; height: 35px;"></label>
         <input id="ta3miyaMahshyInput" type="number" min="0">
-        
         <label for="batatisMahrousaInput">بطاطس مهروسة <img src="بطاطس مهروسة.jfif" alt="بطاطس مهروسة" style="width: 70px; height: 35px;"></label>
         <input id="batatisMahrousaInput" type="number" min="0">
-        
         <label for="musaqaBadhinjanInput">مسقعة <img src="مسقعة.jpg" alt="مسقعة" style="width: 70px; height: 35px;"></label>
         <input id="musaqaBadhinjanInput" type="number" min="0">
-        
         <label for="makhalilInput">مخلل <img src="مخلل.jpg" alt="مخلل" style="width: 70px; height: 35px;"></label>
         <input id="makhalilInput" type="number" min="0">
     </div>
@@ -172,33 +172,29 @@
     <button id="viewOrdersButton">عرض الطلب المجمع</button>
     <button id="viewIndividualOrdersButton">الطلبات الفردية</button>
     
-        <div id="ordersSection">
-            <h2>الطلب المجمع</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>الصنف</th>
-                        <th>الكمية</th>
-                    </tr>
-                </thead>
-                <tbody id="ordersTableBody">
-                </tbody>
-            </table>
+    <div id="ordersSection">
+        <h2>الطلب المجمع</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>الكمية</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+        </table>
+        <h2>أسماء الرجالة اللي هيفطروا</h2>
+        <div id="usersOutput"></div>
+    </div>
     
-            <h2>أسماء الرجالة اللي هيفطروا</h2>
-            <div id="usersOutput"></div>
-        </div>
+    <div id="individualOrdersSection">
+        <h2>الطلبات الفردية</h2>
+        <div id="individualOrdersOutput"></div>
+    </div>
     
-        <div id="individualOrdersSection">
-            <h2>الطلبات الفردية</h2>
-            <div id="individualOrdersOutput"></div>
-        </div>
-    
-        <footer>
-            <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
-            <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
-        </footer>
-    
-    </body>
-    </html>
-    
+    <footer>
+        <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
+        <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
+    </footer>
+</body>
+</html>
