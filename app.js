@@ -139,14 +139,28 @@ async function clearAllOrders() {
     const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
     if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
 
+    const name = document.getElementById("nameInput").value; // الحصول على اسم المستخدم
+    if (!name) {
+        alert("يرجى إدخال اسمك قبل إلغاء الطلبات.");
+        return;
+    }
+
     const querySnapshot = await getDocs(collection(db, "orders"));
     querySnapshot.forEach(async (doc) => {
         try {
             await deleteDoc(doc.ref); // حذف الطلب
+            // سجل اسم المستخدم الذي قام بالحذف في مجموعة جديدة "actionLogs"
+            await addDoc(collection(db, "actionLogs"), {
+                name: name,
+                action: "مسح جميع الطلبات",
+                timestamp: new Date()
+            });
+            console.log(`تم إلغاء الطلب من قبل: ${name}`); // طباعة في وحدة التحكم
         } catch (e) {
             console.error("حدث خطأ أثناء إلغاء الطلبات: ", e);
         }
     });
+
 
     // مسح أسماء الأشخاص من العرض
     const usersOutput = document.getElementById("usersOutput");
