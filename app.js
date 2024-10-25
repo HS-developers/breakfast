@@ -5,12 +5,12 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://ww
 // إعداد Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCAfqTFd9ugNgg_zLMivyCh-u0919vTClw",
-  authDomain: "foodorder-5f2a5.firebaseapp.com",
-  projectId: "foodorder-5f2a5",
-  storageBucket: "foodorder-5f2a5.appspot.com",
-  messagingSenderId: "107748720639",
-  appId: "1:107748720639:web:8b90e830890aef5d07b1ca",
-  measurementId: "G-Y4ETW4WTDP"
+    authDomain: "foodorder-5f2a5.firebaseapp.com",
+    projectId: "foodorder-5f2a5",
+    storageBucket: "foodorder-5f2a5.appspot.com",
+    messagingSenderId: "107748720639",
+    appId: "1:107748720639:web:8b90e830890aef5d07b1ca",
+    measurementId: "G-Y4ETW4WTDP"
 };
 
 // Initialize Firebase
@@ -162,7 +162,6 @@ async function clearAllOrders() {
         }
     });
 
-
     // مسح أسماء الأشخاص من العرض
     const usersOutput = document.getElementById("usersOutput");
     usersOutput.innerHTML = ''; // مسح المحتوى القديم
@@ -192,7 +191,7 @@ async function displayIndividualOrders() {
             ${order.chipsy > 0 ? `<p><strong>بطاطس شيبسي:</strong> ${order.chipsy}</p>` : ''}
             ${order.taamiyaMahshiya > 0 ? `<p><strong>طعمية محشية:</strong> ${order.taamiyaMahshiya}</p>` : ''}
             ${order.mashedPotato > 0 ? `<p><strong>بطاطس مهروسة:</strong> ${order.mashedPotato}</p>` : ''}
-            ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqaa}</p>` : ''}
+                        ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqaa}</p>` : ''}
             ${order.pickles > 0 ? `<p><strong>مخلل:</strong> ${order.pickles}</p>` : ''}
             <hr>
         `;
@@ -200,48 +199,9 @@ async function displayIndividualOrders() {
     });
 }
 
-// دالة لإخفاء وعرض الأقسام
-function toggleSections(sectionToShow) {
-    const sections = ["ordersSection", "individualOrdersSection"];
-    sections.forEach(section => {
-        document.getElementById(section).style.display = section === sectionToShow ? 'block' : 'none';
-    });
-}
-
-async function displayActionLogs() {
-    const logsOutput = document.getElementById("logsOutput");
-    logsOutput.innerHTML = ''; // مسح المحتوى القديم
-
-    const querySnapshot = await getDocs(collection(db, "actionLogs"));
-    if (querySnapshot.empty) {
-        logsOutput.innerHTML = '<p>لا توجد سجلات حالياً.</p>';
-        return;
-    }
-
-    querySnapshot.forEach(doc => {
-        const log = doc.data();
-        const logDiv = document.createElement("div");
-        logDiv.innerHTML = `
-            <p><strong>الاسم:</strong> ${log.name}</p>
-            <p><strong>الحدث:</strong> ${log.action}</p>
-            <p><strong>التاريخ والوقت:</strong> ${log.timestamp.toDate().toLocaleString()}</p>
-            <hr>
-        `;
-        logsOutput.appendChild(logDiv);
-    });
-}
-
-
-// إضافة أحداث للأزرار
+// إضافة المستمعين للحدث للأزرار
 document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
-document.getElementById("viewOrdersButton").addEventListener("click", () => {
-    toggleSections("ordersSection");
-    displayOrders();
-});
-document.getElementById("viewIndividualOrdersButton").addEventListener("click", () => {
-    toggleSections("individualOrdersSection");
-    displayIndividualOrders();
-});
+document.getElementById("displayOrdersButton").addEventListener("click", displayOrders);
 document.getElementById("clearAllOrdersButton").addEventListener("click", clearAllOrders);
-document.getElementById("viewLogsButton").addEventListener("click", displayActionLogs);
+document.getElementById("displayIndividualOrdersButton").addEventListener("click", displayIndividualOrders);
 
