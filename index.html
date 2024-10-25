@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fattarney</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 20px;
+            direction: rtl; /* لتنسيق النصوص باللغة العربية */
+            background: linear-gradient(to bottom right, #ca9c9c, #a7bd7c, #3c3e3d); /* تدرج متناسق مع اللون الأخضر */
+            color: #abf6b9; /* لون النص */
+        }
+        header {
+            background: linear-gradient(135deg, #0a0a0a, #404041); /* تدرج لوني */
+            color: white;
+            padding: 20px;
+            box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925); /* تأثير الظل لإعطاء مظهر ثلاثي الأبعاد */
+            border-radius: 16px; /* زوايا مستديرة */
+            text-align: right;
+        }
+        h1 {
+            margin: 20px;
+            text-align: center;
+            color: rgb(40, 206, 76); /* لون العنوان */
+            font-size: 28px; /* زيادة حجم خط العنوان */
+        }
+        .name-section {
+            margin-top: 20px; /* مسافة من الأعلى */
+            text-align: right; /* محاذاة النص في اليمين */
+        }
+        .name-input {
+            padding: 10px; /* مساحة داخلية */
+            border: 2px solid #2c2b2b; /* حدود العنصر */
+            border-radius: 30px; /* زوايا مستديرة */
+            font-size: 16px; /* حجم الخط */
+            background-color: #f3e011; /* لون الخلفية   */
+            color: #131212; /* لون النص أبيض */
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل لإعطاء مظهر ثلاثي الأبعاد */
+            border: 1px solid #004d00; /* حدود داكنة لإبراز التأثير */
+        }
+        
+        h2 {
+            color: rgb(255, 255, 255); /* لون العنوان */
+            font-size: 28px; /* زيادة حجم خط العنوان */
+        }
+        .order-form {
+            display: flex;
+            flex-wrap: wrap; /* يسمح بتغليف العناصر في الصفوف */
+            margin-bottom: 20px; /* مسافة أسفل النموذج */
+            gap: 10px; /* إزالة الفجوات بين العناصر */
+        }
+        label {
+            flex-basis: 75%; /* كل عنصر يأخذ 75% من عرض السطر */
+            text-align: right; /* محاذاة النص إلى اليمين */
+            margin: 5px 0; /* مساحة صغيرة حول العناصر */
+            font-size: 22px; /* زيادة حجم الخط */
+        }
+        input[type="number"], input[type="text"] {
+            flex-basis: 50%; /* كل إدخال يأخذ 50% من عرض السطر */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center; /* محاذاة النص إلى الوسط */
+            margin: 5px 0; /* فقط مسافة عمودية */
+            font-size: 22px; /* زيادة حجم الخط */
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background-color: #793305; /* لون زر الإرسال */
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 20px; /* زيادة حجم الخط */
+        }
+        button:hover {
+            background-color: #45a049; /* لون الزر عند التمرير */
+        }
+
+        .note {
+            font-size: 20px;
+            color: rgb(245, 241, 7);
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid blue; /* إضافة برواز أزرق */
+            padding: 10px; /* إضافة مساحة داخلية */
+            border-radius: 8px; /* زوايا مستديرة */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 22px; /* زيادة حجم الخط */
+        }
+        th {
+            background-color: rgba(46, 45, 45, 0.8); /* لون رأس الجدول مع شفافية */
+        }
+
+        /* إخفاء قسم الطلب المجمع عند تحميل الصفحة */
+        #ordersSection, #individualOrdersSection {
+            display: none;
+        }
+        
+        /* تنسيق خاص لزر مسح البيانات المخزنة */
+        #clearAllOrdersButton {
+            background-color: #ff0000; /* لون الخلفية */
+            color: rgb(245, 241, 7); /* لون النص */
+            border: 2px solid #8b0000; /* حدود داكنة */
+            border-radius: 8px; /* زوايا مستديرة */
+            font-weight: bold; /* خط عريض */
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل */
+        }
+        #clearAllOrdersButton:hover {
+            background-color: #ff4d4d; /* لون الخلفية عند التمرير */
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+    </style>
+    <script type="module" src="app.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>🍔 ما تيجوا نفطر  🍔</h1>
+        <div class="name-section">
+        <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required>
+    </div>
+    </header>
+        
+    <h2>أصناف الطلب</h2>
+    
+    <div class="order-form">
+        <label for="foulInput">فول <img src="فول.jfif" alt="فول" style="width: 70px; height: 35px;"></label>
+        <input id="foulInput" type="number" min="0">
+        
+        <label for="ta3miyaInput">طعمية <img src="طعمية2.jpg" alt="طعمية" style="width: 70px; height: 35px;"></label>
+        <input id="ta3miyaInput" type="number" min="0">
+        
+        <label for="batatisTawabi3Input">بطاطس صوابع <img src="بطاطس صوابع.jfif" alt="بطاطس صوابع" style="width: 70px; height: 35px;"></label>
+        <input id="batatisTawabi3Input" type="number" min="0">
+        
+        <label for="batatisShibsyInput">بطاطس شيبسي <img src="بطاطس شيبسي.jpg" alt="بطاطس شيبسي" style="width: 70px; height: 35px;"></label>
+        <input id="batatisShibsyInput" type="number" min="0">
+        
+        <label for="ta3miyaMahshyInput">طعمية محشية <img src="طعمية محشية.jpg" alt="طعمية محشية" style="width: 70px; height: 35px;"></label>
+        <input id="ta3miyaMahshyInput" type="number" min="0">
+        
+        <label for="batatisMahrousaInput">بطاطس مهروسة <img src="بطاطس مهروسة.jfif" alt="بطاطس مهروسة" style="width: 70px; height: 35px;"></label>
+        <input id="batatisMahrousaInput" type="number" min="0">
+        
+        <label for="musaqaBadhinjanInput">مسقعة <img src="مسقعة.jpg" alt="مسقعة" style="width: 70px; height: 35px;"></label>
+        <input id="musaqaBadhinjanInput" type="number" min="0">
+        
+        <label for="makhalilInput">مخلل <img src="مخلل.jpg" alt="مخلل" style="width: 70px; height: 35px;"></label>
+        <input id="makhalilInput" type="number" min="0">
+    </div>
+
+    <button id="submitOrderButton">إرسال الطلب</button>
+    <button id="viewOrdersButton">عرض الطلب المجمع</button>
+    <button id="viewIndividualOrdersButton">الطلبات الفردية</button>
+    
+        <div id="ordersSection">
+            <h2>الطلب المجمع</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الصنف</th>
+                        <th>الكمية</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                </tbody>
+            </table>
+    
+            <h2>أسماء الرجالة اللي هيفطروا</h2>
+            <div id="usersOutput"></div>
+        </div>
+    
+        <div id="individualOrdersSection">
+            <h2>الطلبات الفردية</h2>
+            <div id="individualOrdersOutput"></div>
+        </div>
+    
+        <footer>
+            <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
+            <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
+        </footer>
+    
+    </body>
+    </html>
+    
