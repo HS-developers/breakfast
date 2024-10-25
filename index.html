@@ -141,11 +141,9 @@
     
     <h2>تسجيل الدخول</h2>
     <div id="login">
-        <input type="text" id="phoneNumber" placeholder="رقم الهاتف">
-        <div id="recaptcha-container"></div>
-        <button onclick="sendVerificationCode()">إرسال رمز التحقق</button>
-        <input type="text" id="verificationCode" placeholder="رمز التحقق">
-        <button onclick="verifyCode()">تحقق من الرمز</button>
+        <input type="email" id="email" placeholder="البريد الإلكتروني">
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button onclick="login()">تسجيل الدخول</button>
     </div>
     
     <h2>أصناف الطلب</h2>
