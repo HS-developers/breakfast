@@ -5,12 +5,12 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://ww
 // إعداد Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCAfqTFd9ugNgg_zLMivyCh-u0919vTClw",
-  authDomain: "foodorder-5f2a5.firebaseapp.com",
-  projectId: "foodorder-5f2a5",
-  storageBucket: "foodorder-5f2a5.appspot.com",
-  messagingSenderId: "107748720639",
-  appId: "1:107748720639:web:8b90e830890aef5d07b1ca",
-  measurementId: "G-Y4ETW4WTDP"
+    authDomain: "foodorder-5f2a5.firebaseapp.com",
+    projectId: "foodorder-5f2a5",
+    storageBucket: "foodorder-5f2a5.appspot.com",
+    messagingSenderId: "107748720639",
+    appId: "1:107748720639:web:8b90e830890aef5d07b1ca",
+    measurementId: "G-Y4ETW4WTDP"
 };
 
 // Initialize Firebase
@@ -136,13 +136,27 @@ async function displayOrders() {
 
 // دالة إلغاء الطلبات
 async function clearAllOrders() {
-    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
-    if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
+    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟");
+    if (!confirmation) return;
+
+    const name = document.getElementById("nameInput").value; // الحصول على اسم المستخدم
+    if (!name) {
+        alert("يرجى إدخال اسمك قبل إلغاء الطلبات.");
+        return;
+    }
 
     const querySnapshot = await getDocs(collection(db, "orders"));
     querySnapshot.forEach(async (doc) => {
         try {
             await deleteDoc(doc.ref); // حذف الطلب
+            
+            // سجل اسم المستخدم الذي قام بالحذف في مجموعة جديدة "actionLogs"
+            await addDoc(collection(db, "actionLogs"), {
+                name: name,
+                action: "مسح جميع الطلبات",
+                timestamp: new Date()
+            });
+            console.log(`تم إلغاء الطلب من قبل: ${name}`); // طباعة في وحدة التحكم
         } catch (e) {
             console.error("حدث خطأ أثناء إلغاء الطلبات: ", e);
         }
@@ -177,7 +191,7 @@ async function displayIndividualOrders() {
             ${order.chipsy > 0 ? `<p><strong>بطاطس شيبسي:</strong> ${order.chipsy}</p>` : ''}
             ${order.taamiyaMahshiya > 0 ? `<p><strong>طعمية محشية:</strong> ${order.taamiyaMahshiya}</p>` : ''}
             ${order.mashedPotato > 0 ? `<p><strong>بطاطس مهروسة:</strong> ${order.mashedPotato}</p>` : ''}
-            ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqaa}</p>` : ''}
+            ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqa}</p>` : ''}
             ${order.pickles > 0 ? `<p><strong>مخلل:</strong> ${order.pickles}</p>` : ''}
             <hr>
         `;
@@ -185,22 +199,32 @@ async function displayIndividualOrders() {
     });
 }
 
-// دالة لإخفاء وعرض الأقسام
-function toggleSections(sectionToShow) {
-    const sections = ["ordersSection", "individualOrdersSection"];
-    sections.forEach(section => {
-        document.getElementById(section).style.display = section === sectionToShow ? 'block' : 'none';
+// دالة عرض سجلات الأحداث
+async function displayActionLogs() {
+    const logsOutput = document.getElementById("logsOutput");
+    logsOutput.innerHTML = ''; // مسح المحتوى القديم
+
+    const querySnapshot = await getDocs(collection(db, "actionLogs"));
+    if (querySnapshot.empty) {
+        logsOutput.innerHTML = '<p>لا توجد سجلات حالياً.</p>';
+        return;
+    }
+
+    querySnapshot.forEach(doc => {
+        const log = doc.data();
+        const logDiv = document.createElement("div");
+        logDiv.innerHTML = `
+            <p><strong>الاسم:</strong> ${log.name}</p>
+            <p><strong>الحدث:</strong> ${log.action}</p>
+            <p><strong>التاريخ والوقت:</strong> ${log.timestamp.toDate().toLocaleString()}</p>
+            <hr>
+        `;
+        logsOutput.appendChild(logDiv);
     });
 }
 
-// إضافة أحداث للأزرار
-document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
-document.getElementById("viewOrdersButton").addEventListener("click", () => {
-    toggleSections("ordersSection");
-    displayOrders();
-});
-document.getElementById("viewIndividualOrdersButton").addEventListener("click", () => {
-    toggleSections("individualOrdersSection");
-    displayIndividualOrders();
-});
-document.getElementById("clearAllOrdersButton").addEventListener("click", clearAllOrders);
+// تأكد من استدعاء الدوال المناسبة عند تحميل الصفحة
+window.onload = () => {
+    displayOrders(); // عرض الطلبات عند تحميل الصفحة
+    displayActionLogs(); // عرض سجلات الأحداث عند تحميل الصفحة
+};
