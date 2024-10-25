@@ -30,6 +30,9 @@ function login() {
             const user = userCredential.user;
             console.log('User logged in:', user);
             alert("تم تسجيل الدخول بنجاح!");
+            // إظهار قسم الطلبات بعد تسجيل الدخول
+            document.getElementById("loginSection").style.display = "none";
+            document.getElementById("orderSection").style.display = "block";
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -79,7 +82,7 @@ async function submitOrder() {
 
 function clearInputs() {
     document.getElementById("nameInput").value = '';
-    document.getElementById("foulInput").value = '';         // ترك الحقول فارغة
+    document.getElementById("foulInput").value = '';         
     document.getElementById("ta3miyaInput").value = '';
     document.getElementById("batatisTawabi3Input").value = '';   
     document.getElementById("batatisShibsyInput").value = '';
@@ -88,6 +91,7 @@ function clearInputs() {
     document.getElementById("musaqaBadhinjanInput").value = '';
     document.getElementById("makhalilInput").value = '';
 }
+
 // استدعاء clearInputs لمسح القيم الافتراضية عند تحميل الصفحة
 clearInputs();
 
@@ -139,92 +143,36 @@ async function displayOrders() {
     for (const [key, value] of Object.entries(totalQuantities)) {
         if (value > 0) {
             const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${arabicNames[key]}</td>
-                <td>${value}</td>
-            `;
+            const itemCell = document.createElement("td");
+            itemCell.textContent = arabicNames[key];
+            const quantityCell = document.createElement("td");
+            quantityCell.textContent = value;
+            row.appendChild(itemCell);
+            row.appendChild(quantityCell);
             ordersTableBody.appendChild(row);
         }
     }
 
-    // عرض أسماء العملاء الذين قاموا بعمل طلبات
-    const usersOutput = document.getElementById("usersOutput");
-    usersOutput.innerHTML = ''; // مسح المحتوى القديم
-    querySnapshot.forEach(doc => {
-        const order = doc.data();
-        const userDiv = document.createElement("div");
-        userDiv.textContent = order.name;
-        usersOutput.appendChild(userDiv);
-    });
+    // عرض قسم الطلبات
+    document.getElementById("ordersSection").style.display = "block";
 }
 
-// دالة إلغاء الطلبات
-async function clearAllOrders() {
-    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
-    if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
+// ربط زر تسجيل الدخول
+document.getElementById("loginButton").addEventListener("click", login);
 
+// ربط زر إرسال الطلب
+document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
+
+// ربط زر عرض الطلبات
+document.getElementById("viewOrdersButton").addEventListener("click", displayOrders);
+
+// ربط زر إلغاء جميع الطلبات
+document.getElementById("clearAllOrdersButton").addEventListener("click", async () => {
     const querySnapshot = await getDocs(collection(db, "orders"));
     querySnapshot.forEach(async (doc) => {
-        try {
-            await deleteDoc(doc.ref); // حذف الطلب
-        } catch (e) {
-            console.error("حدث خطأ أثناء إلغاء الطلبات: ", e);
-        }
+        await deleteDoc(doc.ref);
     });
-
-    // مسح أسماء الأشخاص من العرض
-    const usersOutput = document.getElementById("usersOutput");
-    usersOutput.innerHTML = ''; // مسح المحتوى القديم
-    
-    displayOrders(); // تحديث عرض الطلبات بعد الحذف
-}
-
-// دالة عرض الطلبات المنفردة
-async function displayIndividualOrders() {
-    const individualOrdersOutput = document.getElementById("individualOrdersOutput");
-    individualOrdersOutput.innerHTML = ''; // مسح المحتوى القديم
-
-    const querySnapshot = await getDocs(collection(db, "orders"));
-    if (querySnapshot.empty) {
-        individualOrdersOutput.innerHTML = '<p>لا توجد طلبات حالياً.</p>';
-        return;
-    }
-
-    querySnapshot.forEach(doc => {
-        const order = doc.data();
-        const orderDiv = document.createElement("div");
-        orderDiv.innerHTML = `
-            <p><strong>الاسم:</strong> ${order.name}</p>
-            ${order.ful > 0 ? `<p><strong>فول:</strong> ${order.ful}</p>` : ''}
-            ${order.taamiya > 0 ? `<p><strong>طعمية:</strong> ${order.taamiya}</p>` : ''}
-            ${order.potatoTawae > 0 ? `<p><strong>بطاطس صوابع:</strong> ${order.potatoTawae}</p>` : ''}
-            ${order.chipsy > 0 ? `<p><strong>بطاطس شيبسي:</strong> ${order.chipsy}</p>` : ''}
-            ${order.taamiyaMahshiya > 0 ? `<p><strong>طعمية محشية:</strong> ${order.taamiyaMahshiya}</p>` : ''}
-            ${order.mashedPotato > 0 ? `<p><strong>بطاطس مهروسة:</strong> ${order.mashedPotato}</p>` : ''}
-            ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqaa}</p>` : ''}
-            ${order.pickles > 0 ? `<p><strong>مخلل:</strong> ${order.pickles}</p>` : ''}
-            <hr>
-        `;
-        individualOrdersOutput.appendChild(orderDiv);
-    });
-}
-
-// دالة لإخفاء وعرض الأقسام
-function toggleSections(sectionToShow) {
-    const sections = ["ordersSection", "individualOrdersSection"];
-    sections.forEach(section => {
-        document.getElementById(section).style.display = section === sectionToShow ? 'block' : 'none';
-    });
-}
-
-// إضافة أحداث للأزرار
-document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
-document.getElementById("viewOrdersButton").addEventListener("click", () => {
-    toggleSections("ordersSection");
-    displayOrders();
+    alert("تم إلغاء جميع الطلبات.");
+    displayOrders(); // تحديث عرض الطلبات بعد الإلغاء
 });
-document.getElementById("viewIndividualOrdersButton").addEventListener("click", () => {
-    toggleSections("individualOrdersSection");
-    displayIndividualOrders();
-});
-document.getElementById("clearAllOrdersButton").addEventListener("click", clearAllOrders);
+
