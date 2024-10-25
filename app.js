@@ -1,6 +1,7 @@
 // تأكد من استيراد المكتبات بشكل صحيح
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js";
 
 // إعداد Firebase
 const firebaseConfig = {
@@ -16,6 +17,27 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app); // Initialize Firestore
+const auth = getAuth(app); // Initialize Firebase Authentication
+
+// Function to handle login
+function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log('User logged in:', user);
+            alert("تم تسجيل الدخول بنجاح!");
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error logging in:', errorCode, errorMessage);
+            alert("خطأ في تسجيل الدخول: " + errorMessage);
+        });
+}
 
 async function submitOrder() {
     const name = document.getElementById("nameInput").value;
