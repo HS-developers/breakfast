@@ -137,6 +137,11 @@
         <input type="password" id="password" placeholder="كلمة المرور" required>
         <button id="loginButton" onclick="login()">تسجيل الدخول</button>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("loginButton").addEventListener("click", login);
+        });
+    </script>
     
     <h2>أصناف الطلب</h2>
     <div class="order-form">
