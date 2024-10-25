@@ -115,10 +115,10 @@ async function displayOrders() {
     for (const [key, value] of Object.entries(totalQuantities)) {
         if (value > 0) {
             const row = document.createElement("tr");
-            row.innerHTML = 
+            row.innerHTML = `
                 <td>${arabicNames[key]}</td>
                 <td>${value}</td>
-            ;
+            `;
             ordersTableBody.appendChild(row);
         }
     }
@@ -136,32 +136,17 @@ async function displayOrders() {
 
 // دالة إلغاء الطلبات
 async function clearAllOrders() {
-    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟");
-    if (!confirmation) return;
-
-    const name = document.getElementById("nameInput").value; // الحصول على اسم المستخدم
-    if (!name) {
-        alert("يرجى إدخال اسمك قبل إلغاء الطلبات.");
-        return;
-    }
+    const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
+    if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
 
     const querySnapshot = await getDocs(collection(db, "orders"));
     querySnapshot.forEach(async (doc) => {
         try {
             await deleteDoc(doc.ref); // حذف الطلب
-            
-            // سجل اسم المستخدم الذي قام بالحذف في مجموعة جديدة "actionLogs"
-            await addDoc(collection(db, "actionLogs"), {
-                name: name,
-                action: "مسح جميع الطلبات",
-                timestamp: new Date()
-            });
-            console.log(تم إلغاء الطلب من قبل: ${name}); // طباعة في وحدة التحكم
         } catch (e) {
             console.error("حدث خطأ أثناء إلغاء الطلبات: ", e);
         }
     });
-
 
     // مسح أسماء الأشخاص من العرض
     const usersOutput = document.getElementById("usersOutput");
@@ -184,18 +169,18 @@ async function displayIndividualOrders() {
     querySnapshot.forEach(doc => {
         const order = doc.data();
         const orderDiv = document.createElement("div");
-        orderDiv.innerHTML = 
+        orderDiv.innerHTML = `
             <p><strong>الاسم:</strong> ${order.name}</p>
-            ${order.ful > 0 ? <p><strong>فول:</strong> ${order.ful}</p> : ''}
-            ${order.taamiya > 0 ? <p><strong>طعمية:</strong> ${order.taamiya}</p> : ''}
-            ${order.potatoTawae > 0 ? <p><strong>بطاطس صوابع:</strong> ${order.potatoTawae}</p> : ''}
-            ${order.chipsy > 0 ? <p><strong>بطاطس شيبسي:</strong> ${order.chipsy}</p> : ''}
-            ${order.taamiyaMahshiya > 0 ? <p><strong>طعمية محشية:</strong> ${order.taamiyaMahshiya}</p> : ''}
-            ${order.mashedPotato > 0 ? <p><strong>بطاطس مهروسة:</strong> ${order.mashedPotato}</p> : ''}
-            ${order.musaqaa > 0 ? <p><strong>مسقعة:</strong> ${order.musaqaa}</p> : ''}
-            ${order.pickles > 0 ? <p><strong>مخلل:</strong> ${order.pickles}</p> : ''}
+            ${order.ful > 0 ? `<p><strong>فول:</strong> ${order.ful}</p>` : ''}
+            ${order.taamiya > 0 ? `<p><strong>طعمية:</strong> ${order.taamiya}</p>` : ''}
+            ${order.potatoTawae > 0 ? `<p><strong>بطاطس صوابع:</strong> ${order.potatoTawae}</p>` : ''}
+            ${order.chipsy > 0 ? `<p><strong>بطاطس شيبسي:</strong> ${order.chipsy}</p>` : ''}
+            ${order.taamiyaMahshiya > 0 ? `<p><strong>طعمية محشية:</strong> ${order.taamiyaMahshiya}</p>` : ''}
+            ${order.mashedPotato > 0 ? `<p><strong>بطاطس مهروسة:</strong> ${order.mashedPotato}</p>` : ''}
+            ${order.musaqaa > 0 ? `<p><strong>مسقعة:</strong> ${order.musaqaa}</p>` : ''}
+            ${order.pickles > 0 ? `<p><strong>مخلل:</strong> ${order.pickles}</p>` : ''}
             <hr>
-        ;
+        `;
         individualOrdersOutput.appendChild(orderDiv);
     });
 }
@@ -208,30 +193,6 @@ function toggleSections(sectionToShow) {
     });
 }
 
-async function displayActionLogs() {
-    const logsOutput = document.getElementById("logsOutput");
-    logsOutput.innerHTML = ''; // مسح المحتوى القديم
-
-    const querySnapshot = await getDocs(collection(db, "actionLogs"));
-    if (querySnapshot.empty) {
-        logsOutput.innerHTML = '<p>لا توجد سجلات حالياً.</p>';
-        return;
-    }
-
-    querySnapshot.forEach(doc => {
-        const log = doc.data();
-        const logDiv = document.createElement("div");
-        logDiv.innerHTML = 
-            <p><strong>الاسم:</strong> ${log.name}</p>
-            <p><strong>الحدث:</strong> ${log.action}</p>
-            <p><strong>التاريخ والوقت:</strong> ${log.timestamp.toDate().toLocaleString()}</p>
-            <hr>
-        ;
-        logsOutput.appendChild(logDiv);
-    });
-}
-
-
 // إضافة أحداث للأزرار
 document.getElementById("submitOrderButton").addEventListener("click", submitOrder);
 document.getElementById("viewOrdersButton").addEventListener("click", () => {
@@ -243,6 +204,3 @@ document.getElementById("viewIndividualOrdersButton").addEventListener("click", 
     displayIndividualOrders();
 });
 document.getElementById("clearAllOrdersButton").addEventListener("click", clearAllOrders);
-document.getElementById("viewLogsButton").addEventListener("click", displayActionLogs);
-
-
