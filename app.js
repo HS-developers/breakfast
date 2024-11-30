@@ -135,7 +135,17 @@ async function displayOrders() {
 }
 
 // دالة إلغاء الطلبات
+// دالة إلغاء الطلبات مع إضافة خطوة التحقق من كلمة السر
 async function clearAllOrders() {
+    const password = "king666"; // قم بتحديد كلمة السر هنا
+    const userPassword = prompt("يرجى إدخال كلمة السر لتأكيد مسح البيانات:");
+
+    // تحقق من كلمة السر المدخلة
+    if (userPassword !== password) {
+        alert("كلمة السر غير صحيحة. لم يتم مسح البيانات.");
+        return; // إذا كانت كلمة السر غير صحيحة، نوقف تنفيذ الدالة
+    }
+
     const confirmation = confirm("هل أنت متأكد من أنك تريد إلغاء جميع الطلبات؟"); // رسالة تأكيد
     if (!confirmation) return; // إذا اختار المستخدم "إلغاء"، نخرج من الدالة
 
@@ -154,6 +164,7 @@ async function clearAllOrders() {
     
     displayOrders(); // تحديث عرض الطلبات بعد الحذف
 }
+
 
 // دالة عرض الطلبات المنفردة
 async function displayIndividualOrders() {
