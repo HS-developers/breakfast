@@ -3,93 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lets Breakfast</title>
+    <title>ما تيجوا نفطر 🍔</title>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
             margin: 20px;
-            direction: rtl; /* لتنسيق النصوص باللغة العربية */
-            background: linear-gradient(to bottom right, #e90606, #c28282, #001008f9); /* تدرج متناسق مع اللون الأخضر */
-            color: #abf6b9; /* لون النص */
+            direction: rtl;
+            background: linear-gradient(to bottom right, #e90606, #c28282, #001008f9);
+            color: #abf6b9;
         }
+
         header {
-    display: flex;
-    align-items: center;
-    justify-content: right; /* يجعل العنوان في المنتصف */
-    background: linear-gradient(135deg, #0a0a0a, #404041); /* تدرج لوني */
-    color: white;
-    padding: 20px;
-    box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925); /* تأثير الظل */
-    border-radius: 16px; /* زوايا مستديرة */
-    position: relative; /* لتحديد موقع اللوجو بشكل مطلق */
-}
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            background: linear-gradient(135deg, #0a0a0a, #404041);
+            color: white;
+            padding: 20px;
+            box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925);
+            border-radius: 16px;
+            position: relative;
+        }
 
-.logo {
-    width: 95px; /* عرض الصورة */
-    height: auto;
-    position: absolute;
-    left: 10px; /* جعل اللوجو على اليسار */
-    border-radius: 8px; /* زوايا مستديرة للصورة */
-}
+        .logo {
+            width: 95px;
+            height: auto;
+            position: absolute;
+            left: 10px;
+            border-radius: 8px;
+        }
 
-h1 {
-    margin: 0; /* إزالة المسافات حول العنوان */
-    color: rgb(40, 206, 76); /* لون العنوان */
-    font-size: 28px;
-}
+        h1 {
+            margin: 0;
+            color: rgb(40, 206, 76);
+            font-size: 28px;
+        }
 
         .name-section {
-            margin-top: 20px; /* مسافة من الأعلى */
-            text-align: right; /* محاذاة النص في اليمين */
+            margin-top: 20px;
+            text-align: right;
         }
+
         .name-input {
-            padding: 10px; /* مساحة داخلية */
-            border: 2px solid #2c2b2b; /* حدود العنصر */
-            border-radius: 30px; /* زوايا مستديرة */
-            font-size: 16px; /* حجم الخط */
-            background-color: #f3e011; /* لون الخلفية   */
-            color: #131212; /* لون النص أبيض */
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل لإعطاء مظهر ثلاثي الأبعاد */
-            border: 1px solid #004d00; /* حدود داكنة لإبراز التأثير */
+            padding: 10px;
+            border: 2px solid #2c2b2b;
+            border-radius: 30px;
+            font-size: 16px;
+            background-color: #f3e011;
+            color: #131212;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+            border: 1px solid #004d00;
         }
-        
+
         h2 {
-            color: rgb(255, 255, 255); /* لون العنوان */
-            font-size: 28px; /* زيادة حجم خط العنوان */
+            color: rgb(255, 255, 255);
+            font-size: 28px;
+            margin-top: 30px;
+            margin-bottom: 10px;
         }
+
         .order-form {
             display: flex;
-            flex-wrap: wrap; /* يسمح بتغليف العناصر في الصفوف */
-            margin-bottom: 20px; /* مسافة أسفل النموذج */
-            gap: 10px; /* إزالة الفجوات بين العناصر */
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 10px;
         }
+
         label {
-            flex-basis: 75%; /* كل عنصر يأخذ 75% من عرض السطر */
-            text-align: right; /* محاذاة النص إلى اليمين */
-            margin: 5px 0; /* مساحة صغيرة حول العناصر */
-            font-size: 22px; /* زيادة حجم الخط */
+            flex-basis: 75%;
+            text-align: right;
+            margin: 5px 0;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
         input[type="number"], input[type="text"] {
-            flex-basis: 50%; /* كل إدخال يأخذ 50% من عرض السطر */
+            flex-basis: 50%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            text-align: center; /* محاذاة النص إلى الوسط */
-            margin: 5px 0; /* فقط مسافة عمودية */
-            font-size: 22px; /* زيادة حجم الخط */
+            text-align: center;
+            margin: 5px 0;
+            font-size: 22px;
+            background: #fff9e8;
+            color: #2c2b2b;
         }
+
         button {
             padding: 10px 15px;
             margin: 5px 0;
-            background-color: #793305; /* لون زر الإرسال */
+            background-color: #793305;
             color: white;
             border: none;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 20px; /* زيادة حجم الخط */
+            font-size: 20px;
+            transition: background 0.2s;
         }
         button:hover {
-            background-color: #45a049; /* لون الزر عند التمرير */
+            background-color: #45a049;
         }
 
         .note {
@@ -97,9 +111,9 @@ h1 {
             color: rgb(245, 241, 7);
             text-align: center;
             margin-top: 20px;
-            border: 2px solid blue; /* إضافة برواز أزرق */
-            padding: 10px; /* إضافة مساحة داخلية */
-            border-radius: 8px; /* زوايا مستديرة */
+            border: 2px solid blue;
+            padding: 10px;
+            border-radius: 8px;
         }
 
         table {
@@ -111,28 +125,26 @@ h1 {
             padding: 10px;
             border: 1px solid #ccc;
             text-align: center;
-            font-size: 22px; /* زيادة حجم الخط */
+            font-size: 22px;
         }
         th {
-            background-color: rgba(46, 45, 45, 0.8); /* لون رأس الجدول مع شفافية */
+            background-color: rgba(46, 45, 45, 0.8);
         }
 
-        /* إخفاء قسم الطلب المجمع عند تحميل الصفحة */
         #ordersSection, #individualOrdersSection {
             display: none;
         }
-        
-        /* تنسيق خاص لزر مسح البيانات المخزنة */
+
         #clearAllOrdersButton {
-            background-color: #ff0000; /* لون الخلفية */
-            color: rgb(245, 241, 7); /* لون النص */
-            border: 2px solid #8b0000; /* حدود داكنة */
-            border-radius: 8px; /* زوايا مستديرة */
-            font-weight: bold; /* خط عريض */
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* تأثير الظل */
+            background-color: #ff0000;
+            color: rgb(245, 241, 7);
+            border: 2px solid #8b0000;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
         #clearAllOrdersButton:hover {
-            background-color: #ff4d4d; /* لون الخلفية عند التمرير */
+            background-color: #ff4d4d;
         }
 
         footer {
@@ -140,13 +152,82 @@ h1 {
             text-align: right;
         }
 
+        /* Spinner styles */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #008000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 120px;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.3);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: auto;
+            padding: 25px 15px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            color: #333;
+            border-radius: 12px;
+        }
+        .close-modal {
+            color: #aaa;
+            float: left;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .order-form {
+                flex-direction: column;
+                gap: 0;
+            }
+            label, input[type="number"], input[type="text"] {
+                flex-basis: 100%;
+                font-size: 18px;
+            }
+            h1, h2 {
+                font-size: 22px;
+            }
+            .logo {
+                width: 60px;
+            }
+            th, td {
+                font-size: 16px;
+            }
+            button {
+                font-size: 16px;
+            }
+        }
     </style>
     <script type="module" src="app.js"></script>
 </head>
 <body>
 
     <header>
-        <img src="60.png" alt="لوجو الشركة" class="logo"> <!-- إضافة اللوجو -->
+        <img src="60.png" alt="لوجو الشركة" class="logo">
         <h1>🍔ما تيجوا نفطر🍔</h1>
     </header>
 
@@ -157,65 +238,87 @@ h1 {
     <h2>أصناف الطلب</h2>
     
     <div class="order-form">
-        <label for="foulInput">فول <img src="فول.jfif" alt="فول" style="width: 70px; height: 35px;"></label>
-        <input id="foulInput" type="number" min="0">
-        
-        <label for="ta3miyaInput">طعمية <img src="طعمية2.jpg" alt="طعمية" style="width: 70px; height: 35px;"></label>
-        <input id="ta3miyaInput" type="number" min="0">
-        
-        <label for="batatisTawabi3Input">بطاطس صوابع <img src="بطاطس صوابع.jfif" alt="بطاطس صوابع" style="width: 70px; height: 35px;"></label>
-        <input id="batatisTawabi3Input" type="number" min="0">
-        
-        <label for="batatisShibsyInput">بطاطس شيبسي <img src="بطاطس شيبسي.jpg" alt="بطاطس شيبسي" style="width: 70px; height: 35px;"></label>
-        <input id="batatisShibsyInput" type="number" min="0">
-        
-        <label for="ta3miyaMahshyInput">طعمية محشية <img src="طعمية محشية.jpg" alt="طعمية محشية" style="width: 70px; height: 35px;"></label>
-        <input id="ta3miyaMahshyInput" type="number" min="0">
-        
-        <label for="batatisMahrousaInput">بطاطس مهروسة <img src="بطاطس مهروسة.jfif" alt="بطاطس مهروسة" style="width: 70px; height: 35px;"></label>
-        <input id="batatisMahrousaInput" type="number" min="0">
-        
-        <label for="musaqaBadhinjanInput">مسقعة <img src="مسقعة.jpg" alt="مسقعة" style="width: 70px; height: 35px;"></label>
-        <input id="musaqaBadhinjanInput" type="number" min="0">
-        
-        <label for="makhalilInput">مخلل <img src="مخلل.jpg" alt="مخلل" style="width: 70px; height: 35px;"></label>
-        <input id="makhalilInput" type="number" min="0">
+        <label for="foulInput">فول
+            <img src="فول.jfif" alt="فول" style="width: 70px; height: 35px;">
+        </label>
+        <input id="foulInput" type="number" min="0" value="0">
+
+        <label for="ta3miyaInput">طعمية
+            <img src="طعمية2.jpg" alt="طعمية" style="width: 70px; height: 35px;">
+        </label>
+        <input id="ta3miyaInput" type="number" min="0" value="0">
+
+        <label for="batatisTawabi3Input">بطاطس صوابع
+            <img src="بطاطس صوابع.jfif" alt="بطاطس صوابع" style="width: 70px; height: 35px;">
+        </label>
+        <input id="batatisTawabi3Input" type="number" min="0" value="0">
+
+        <label for="batatisShibsyInput">بطاطس شيبسي
+            <img src="بطاطس شيبسي.jpg" alt="بطاطس شيبسي" style="width: 70px; height: 35px;">
+        </label>
+        <input id="batatisShibsyInput" type="number" min="0" value="0">
+
+        <label for="ta3miyaMahshyInput">طعمية محشية
+            <img src="طعمية محشية.jpg" alt="طعمية محشية" style="width: 70px; height: 35px;">
+        </label>
+        <input id="ta3miyaMahshyInput" type="number" min="0" value="0">
+
+        <label for="batatisMahrousaInput">بطاطس مهروسة
+            <img src="بطاطس مهروسة.jfif" alt="بطاطس مهروسة" style="width: 70px; height: 35px;">
+        </label>
+        <input id="batatisMahrousaInput" type="number" min="0" value="0">
+
+        <label for="musaqaBadhinjanInput">مسقعة
+            <img src="مسقعة.jpg" alt="مسقعة" style="width: 70px; height: 35px;">
+        </label>
+        <input id="musaqaBadhinjanInput" type="number" min="0" value="0">
+
+        <label for="makhalilInput">مخلل
+            <img src="مخلل.jpg" alt="مخلل" style="width: 70px; height: 35px;">
+        </label>
+        <input id="makhalilInput" type="number" min="0" value="0">
     </div>
 
     <button id="submitOrderButton">إرسال الطلب</button>
     <button id="viewOrdersButton">عرض الطلب المجمع</button>
     <button id="viewIndividualOrdersButton">الطلبات الفردية</button>
-    
-        <div id="ordersSection">
-            <h2>الطلب المجمع</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>الصنف</th>
-                        <th>الكمية</th>
-                    </tr>
-                </thead>
-                <tbody id="ordersTableBody">
-                </tbody>
-            </table>
-    
-            <h2>أسماء الأشخاص اللي هيفطروا</h2>
-            <div id="usersOutput"></div>
+
+    <div class="spinner" id="spinner"></div>
+
+    <!-- Modal for user messages -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModalBtn">&times;</span>
+            <p id="modalMessage"></p>
         </div>
+    </div>
     
-        <div id="individualOrdersSection">
-            <h2>الطلبات الفردية</h2>
-            <div id="individualOrdersOutput"></div>
-        </div>
-    
-        <footer>
-            <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
-            <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
-        </footer>
-        <footer dir="rtl" style="display: flex; justify-content: center; border-radius: 16px; align-items: center; padding: 0; line-height: 1; text-align: center; background-color: #dee8f0; color: #007bff; font-size: 0.7em; height: 25px;">
-            <p>Copyright © 2024 GENIUS Tech Co. All Rights Reserved</p>
-        </footer>
-    
-    </body>
-    </html>
-    
+    <div id="ordersSection">
+        <h2>الطلب المجمع</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>الكمية</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+        </table>
+        <h2>أسماء الأشخاص اللي هيفطروا</h2>
+        <div id="usersOutput"></div>
+    </div>
+
+    <div id="individualOrdersSection">
+        <h2>الطلبات الفردية</h2>
+        <div id="individualOrdersOutput"></div>
+    </div>
+
+    <footer>
+        <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
+        <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
+    </footer>
+    <footer dir="rtl" style="display: flex; justify-content: center; border-radius: 16px; align-items: center; padding: 0; line-height: 1; text-align: center; background-color: #dee8f0; color: #008042; margin-top: 10px;">
+        <p>Copyright © 2024 GENIUS Tech Co. All Rights Reserved</p>
+    </footer>
+</body>
+</html>
