@@ -40,7 +40,7 @@ async function loadCurrencies() {
             const current = rates[currency].rate;
             const old = previousRates[currency] || current;
             const trend = current >= old ? 'up' : 'down';
-            html += `<span class="${trend}">${currency}: ${formatNumber(current)} ج.م <img src="${rates[currency].flag}" alt="${currency}"></span>`;
+            html += `<span class="${trend}"><img src="${rates[currency].flag}" alt="${currency}">${currency}: ${formatNumber(current)} ج.م</span>`;
             previousRates[currency] = current;
         } 
 
