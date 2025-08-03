@@ -21,7 +21,8 @@ class BanqueMisrDailyRates {
         try {
             // استخدام proxy service للتغلب على CORS
             const proxyUrl = 'https://api.allorigins.win/get?url=';
-            const response = await fetch(proxyUrl + encodeURIComponent(this.banqueMisrUrl));
+            const response = await fetch('https://breakfast-jet.vercel.app/api/bm');
+            const html = await response.text();
             const data = await response.json();
             if (data.contents) {
                 return this.parseBanqueMisrHTML(data.contents);
@@ -170,4 +171,5 @@ class BanqueMisrDailyRates {
         console.log('📁 Using cached Banque Misr rates as fallback');
         return this.getSavedRates();
     }
+
 }
