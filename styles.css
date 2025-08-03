@@ -448,9 +448,10 @@ footer {
     #currency-ticker img {
         width: 18px;
         height: 12px;
+        margin-right: 6px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 20s linear infinite; /* إبطاء للموبايل */
+        animation: scroll-rtl 23s linear infinite; /* إبطاء للموبايل */
     }
 }
 
@@ -514,9 +515,10 @@ footer {
     #currency-ticker img {
         width: 16px;
         height: 10px;
+        margin-right: 6px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 18s linear infinite; /* إبطاء أكتر للشاشات الصغيرة */
+        animation: scroll-rtl 23s linear infinite; /* إبطاء أكتر للشاشات الصغيرة */
     }
 }
 
@@ -754,5 +756,6 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
+
 
 
