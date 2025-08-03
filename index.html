@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -17,31 +16,9 @@
         <img src="60.png" alt="لوجو الشركة" class="logo">
     </header>
 
-    <!-- شريط المعلومات الثابت أسفل الهيدر مباشرة -->
-    <div id="infoBar" class="info-bar">
-      <div class="info-section currency-section" id="currencySection" title="أسعار العملات">
-        <span class="icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>
-        <span id="currencyLive">جاري التحميل...</span>
-      </div>
-      <div class="info-section weather-section" id="weatherSection" title="طقس القاهرة">
-        <span class="icon"><i class="fa-solid fa-cloud-sun"></i></span>
-        <span id="weatherLive">جاري التحميل...</span>
-      </div>
-      <!-- تم تعطيل ظهور مواقيت الصلاة عبر إخفاء القسم التالي -->
-      <div class="info-section prayer-section" id="prayerSection" title="مواقيت الصلاة" style="display:none;">
-        <span class="icon"><i class="fa-solid fa-mosque"></i></span>
-        <span id="prayerLive">جاري التحميل...</span>
-      </div>
-      <!-- نافذة العد التنازلي للصلاة تظهر عند الضغط -->
-      <div id="prayerCountdownModal" class="countdown-modal" style="display:none;">
-        <div class="modal-content">
-          <span id="closeCountdownModal" class="close-btn">&times;</span>
-          <h3>العد التنازلي لأقرب صلاة</h3>
-          <div id="nextPrayerName"></div>
-          <div id="nextPrayerTime"></div>
-          <div id="prayerCountdown"></div>
-        </div>
-      </div>
+    <!-- شريط أسعار العملات أسفل الهيدر -->
+    <div id="currency-ticker">
+        <div class="scroll">جارٍ تحميل الأسعار...</div>
     </div>
     
     <main>
@@ -199,11 +176,9 @@
 
     <!-- يجب وضع سكريبت مكتبة التصدير هنا أولاً -->
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
-    <!-- سكريبت شريط المعلومات -->
-    <script type="module" src="infoBar.js"></script>
-    <!-- سكريبت التطبيق الأصلي -->
+    <!-- سكريطب شريط العملات -->
+    <script src="infoBar.js"></script>
+    <!-- سكريطب التطبيق الأصلي -->
     <script type="module" src="app.js"></script>
 </body>
 </html>
-
-
