@@ -443,14 +443,14 @@ footer {
         padding: 6px 0;
     }
     #currency-ticker span {
-        margin: 0 30px;
+        margin: 0 20px;
     }
     #currency-ticker img {
         width: 18px;
         height: 12px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 20s linear infinite; /* إبطاء للموبايل */
+        animation: scroll-rtl 30s linear infinite; /* إبطاء للموبايل */
     }
 }
 
@@ -754,5 +754,4 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
-
 
