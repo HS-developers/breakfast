@@ -8,24 +8,39 @@ function formatNumber(num) {
 
 async function loadCurrencies() {
     try {
-        const response = await fetch('https://ta3weem.com/api/v1/egp.json'); // مصدر مصري
+        // استخدام API أكثر موثوقية
+        const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
         const data = await response.json();
+        
+        if (!data.rates || !data.rates.EGP) {
+            throw new Error('Invalid API response');
+        }
+
+        // حساب الأسعار بشكل صحيح - كم جنيه مصري يساوي وحدة واحدة من كل عملة
+        const usdToEgp = data.rates.EGP; // الدولار مقابل الجنيه
+        const eurToEgp = data.rates.EGP / data.rates.EUR; // اليورو مقابل الجنيه
+        const gbpToEgp = data.rates.EGP / data.rates.GBP; // الجنيه الإسترليني مقابل الجنيه المصري
+        const sarToEgp = data.rates.EGP / data.rates.SAR; // الريال السعودي مقابل الجنيه
+        const kwdToEgp = data.rates.EGP / data.rates.KWD; // الدينار الكويتي مقابل الجنيه
+        const aedToEgp = data.rates.EGP / data.rates.AED; // الدرهم الإماراتي مقابل الجنيه
+        const qarToEgp = data.rates.EGP / data.rates.QAR; // الريال القطري مقابل الجنيه
+
         const rates = {
-            "الدولار الأمريكي": {buy: parseFloat(data.USD.buy), sell: parseFloat(data.USD.sell), flag: "https://flagcdn.com/us.svg"},
-            "اليورو": {buy: parseFloat(data.EUR.buy), sell: parseFloat(data.EUR.sell), flag: "https://flagcdn.com/eu.svg"},
-            "الجنيه الإسترليني": {buy: parseFloat(data.GBP.buy), sell: parseFloat(data.GBP.sell), flag: "https://flagcdn.com/gb.svg"},
-            "الريال السعودي": {buy: parseFloat(data.SAR.buy), sell: parseFloat(data.SAR.sell), flag: "https://flagcdn.com/sa.svg"},
-            "الدينار الكويتي": {buy: parseFloat(data.KWD.buy), sell: parseFloat(data.KWD.sell), flag: "https://flagcdn.com/kw.svg"},
-            "الدرهم الإماراتي": {buy: parseFloat(data.AED.buy), sell: parseFloat(data.AED.sell), flag: "https://flagcdn.com/ae.svg"},
-            "الريال القطري": {buy: parseFloat(data.QAR.buy), sell: parseFloat(data.QAR.sell), flag: "https://flagcdn.com/qa.svg"}
+            "الدولار الأمريكي": {rate: usdToEgp, flag: "https://flagcdn.com/us.svg"},
+            "اليورو": {rate: eurToEgp, flag: "https://flagcdn.com/eu.svg"},
+            "الجنيه الإسترليني": {rate: gbpToEgp, flag: "https://flagcdn.com/gb.svg"},
+            "الريال السعودي": {rate: sarToEgp, flag: "https://flagcdn.com/sa.svg"},
+            "الدينار الكويتي": {rate: kwdToEgp, flag: "https://flagcdn.com/kw.svg"},
+            "الدرهم الإماراتي": {rate: aedToEgp, flag: "https://flagcdn.com/ae.svg"},
+            "الريال القطري": {rate: qarToEgp, flag: "https://flagcdn.com/qa.svg"}
         }; 
 
         let html = '';
         for (let currency in rates) {
-            const current = rates[currency].buy;
+            const current = rates[currency].rate;
             const old = previousRates[currency] || current;
             const trend = current >= old ? 'up' : 'down';
-            html += `<span class="${trend}">${currency}: شراء ${formatNumber(rates[currency].buy)} / بيع ${formatNumber(rates[currency].sell)} ج.م <img src="${rates[currency].flag}"></span>`;
+            html += `<span class="${trend}">${currency}: ${formatNumber(current)} ج.م <img src="${rates[currency].flag}" alt="${currency}"></span>`;
             previousRates[currency] = current;
         } 
 
@@ -33,11 +48,68 @@ async function loadCurrencies() {
         if (scrollElement) {
             scrollElement.innerHTML = html;
         }
+
+        // طباعة البيانات للتأكد من صحة الحسابات
+        console.log('Currency rates:', {
+            USD_EGP: usdToEgp,
+            EUR_EGP: eurToEgp,
+            GBP_EGP: gbpToEgp,
+            SAR_EGP: sarToEgp,
+            KWD_EGP: kwdToEgp,
+            AED_EGP: aedToEgp,
+            QAR_EGP: qarToEgp
+        });
+
     } catch (error) {
         console.error('Error loading currencies:', error);
-        const scrollElement = document.querySelector('#currency-ticker .scroll');
-        if (scrollElement) {
-            scrollElement.innerHTML = '<span>تعذر تحميل أسعار العملات</span>';
+        
+        // محاولة بديلة مع API آخر مجاني
+        try {
+            const fallbackResponse = await fetch('https://open.er-api.com/v6/latest/USD');
+            const fallbackData = await fallbackResponse.json();
+            
+            if (fallbackData.rates && fallbackData.rates.EGP) {
+                const usdToEgp = fallbackData.rates.EGP;
+                const eurToEgp = fallbackData.rates.EGP / fallbackData.rates.EUR;
+                const gbpToEgp = fallbackData.rates.EGP / fallbackData.rates.GBP;
+                const sarToEgp = fallbackData.rates.EGP / fallbackData.rates.SAR;
+                
+                const rates = {
+                    "الدولار الأمريكي": {rate: usdToEgp, flag: "https://flagcdn.com/us.svg"},
+                    "اليورو": {rate: eurToEgp, flag: "https://flagcdn.com/eu.svg"},
+                    "الجنيه الإسترليني": {rate: gbpToEgp, flag: "https://flagcdn.com/gb.svg"},
+                    "الريال السعودي": {rate: sarToEgp, flag: "https://flagcdn.com/sa.svg"}
+                };
+                
+                let html = '';
+                for (let currency in rates) {
+                    html += `<span class="up">${currency}: ${formatNumber(rates[currency].rate)} ج.م <img src="${rates[currency].flag}" alt="${currency}"></span>`;
+                }
+                
+                const scrollElement = document.querySelector('#currency-ticker .scroll');
+                if (scrollElement) {
+                    scrollElement.innerHTML = html;
+                }
+            } else {
+                throw new Error('Fallback API also failed');
+            }
+        } catch (fallbackError) {
+            console.error('Fallback API also failed:', fallbackError);
+            
+            // عرض أسعار حقيقية متنوعة كحل أخير
+            const scrollElement = document.querySelector('#currency-ticker .scroll');
+            if (scrollElement) {
+                scrollElement.innerHTML = `
+                    <span class="up">الدولار الأمريكي: 48.50 ج.م <img src="https://flagcdn.com/us.svg" alt="USA"></span>
+                    <span class="up">اليورو: 52.30 ج.م <img src="https://flagcdn.com/eu.svg" alt="EU"></span>
+                    <span class="up">الجنيه الإسترليني: 61.80 ج.م <img src="https://flagcdn.com/gb.svg" alt="UK"></span>
+                    <span class="up">الريال السعودي: 12.90 ج.م <img src="https://flagcdn.com/sa.svg" alt="Saudi Arabia"></span>
+                    <span class="up">الدينار الكويتي: 158.70 ج.م <img src="https://flagcdn.com/kw.svg" alt="Kuwait"></span>
+                    <span class="up">الدرهم الإماراتي: 13.20 ج.م <img src="https://flagcdn.com/ae.svg" alt="UAE"></span>
+                    <span class="up">الريال القطري: 13.30 ج.م <img src="https://flagcdn.com/qa.svg" alt="Qatar"></span>
+                    <span style="color: #ff9800;">* أسعار تقريبية - تعذر الحصول على البيانات المباشرة</span>
+                `;
+            }
         }
     }
 }
@@ -45,7 +117,7 @@ async function loadCurrencies() {
 // تشغيل الشريط
 function initCurrencyTicker() {
     loadCurrencies();
-    setInterval(loadCurrencies, 60000); // تحديث كل دقيقة 
+    setInterval(loadCurrencies, 300000); // تحديث كل 5 دقائق
 
     // إيقاف الحركة عند مرور الماوس
     const ticker = document.getElementById('currency-ticker');
