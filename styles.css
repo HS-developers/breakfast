@@ -82,7 +82,7 @@ header {
     overflow: hidden;
     white-space: nowrap;
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
-    direction: rtl; /* تغيير الاتجاه لليسار */
+    direction: ltr; /* تغيير الاتجاه لليسار */
 }
 
 #currency-ticker .scroll {
@@ -97,24 +97,24 @@ header {
 #currency-ticker span {
     display: inline-flex;
     align-items: center;
-    margin: 0 30px;
+    margin: 0 43px;
     direction: rtl; /* المحتوى يبقى عربي */
 }
 
 #currency-ticker img {
     width: 20px;
     height: 14px;
-    margin-right: 6px;
+    margin-right: 10px;
     border: 1px solid #ccc;
 }
 
 /* الأنيميشن الجديد - من اليمين لليسار بدون تأخير */
 @keyframes scroll-rtl {
     0% {
-        transform: translateX(100%); /* يبدأ من اليمين تماماً */
+        transform: translateX(-100%); /* يبدأ من اليمين تماماً */
     }
     100% {
-        transform: translateX(-100%); /* ينتهي في اليسار تماماً */
+        transform: translateX(100%); /* ينتهي في اليسار تماماً */
     }
 }
 
@@ -448,10 +448,9 @@ footer {
     #currency-ticker img {
         width: 18px;
         height: 12px;
-        margin-right: 6px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 23s linear infinite; /* إبطاء للموبايل */
+        animation: scroll-rtl 20s linear infinite; /* إبطاء للموبايل */
     }
 }
 
@@ -515,10 +514,9 @@ footer {
     #currency-ticker img {
         width: 16px;
         height: 10px;
-        margin-right: 6px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 23s linear infinite; /* إبطاء أكتر للشاشات الصغيرة */
+        animation: scroll-rtl 18s linear infinite; /* إبطاء أكتر للشاشات الصغيرة */
     }
 }
 
@@ -756,6 +754,4 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
-
-
 
