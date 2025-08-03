@@ -1,4 +1,4 @@
-// نظام جلب أسعار بنك مصر يومياً
+ // نظام جلب أسعار بنك مصر يومياً
 class BanqueMisrDailyRates {
     constructor() {
         this.storageKey = 'banque_misr_daily_rates';
@@ -171,3 +171,4 @@ class BanqueMisrDailyRates {
         return this.getSavedRates();
     }
 }
+
