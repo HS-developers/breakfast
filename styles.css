@@ -104,7 +104,7 @@ header {
 #currency-ticker img {
     width: 20px;
     height: 14px;
-    margin-left: 6px;
+    margin-right: 6px;
     border: 1px solid #ccc;
 }
 
@@ -754,3 +754,4 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
+
