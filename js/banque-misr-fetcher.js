@@ -21,7 +21,7 @@ class BanqueMisrDailyRates {
         try {
             // استخدام proxy service للتغلب على CORS
             const proxyUrl = 'https://api.allorigins.win/get?url=';
-            const response = await fetch('https://breakfast-jet.vercel.app/api/bm');
+            const response = await fetch('https://vercel-banque-misr-proxy.vercel.app/api/bm');
             const html = await response.text();
             const data = await response.json();
             if (data.contents) {
@@ -173,3 +173,4 @@ class BanqueMisrDailyRates {
     }
 
 }
+
