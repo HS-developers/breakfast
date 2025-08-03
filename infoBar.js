@@ -1,4 +1,4 @@
-// شريط أسعار العملات - نسخة بنك مصر
+ // شريط أسعار العملات - نسخة بنك مصر
 let previousRates = {};
 const banqueMisrRates = new BanqueMisrDailyRates();
 
@@ -140,3 +140,4 @@ if (document.readyState === 'loading') {
 } else {
     initCurrencyTicker();
 }
+
