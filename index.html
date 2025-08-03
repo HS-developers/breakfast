@@ -3,321 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فطار أونلاين 🍔</title>
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            margin: 20px;
-            direction: rtl;
-            background: linear-gradient(to bottom right, #e90606, #c28282, #001008f9);
-            color: #abf6b9;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: right;
-            background: linear-gradient(135deg, #0a0a0a, #404041);
-            color: white;
-            padding: 20px;
-            box-shadow: 3px 3px 5px rgba(85, 1, 1, 0.925);
-            border-radius: 16px;
-            position: relative;
-        }
-
-        .logo {
-            width: 95px;
-            height: auto;
-            position: absolute;
-            left: 10px;
-            border-radius: 8px;
-        }
-
-        h1 {
-            margin: 0;
-            color: rgb(40, 206, 76);
-            font-size: 28px;
-        }
-
-        .name-section {
-            margin-top: 20px;
-            text-align: right;
-        }
-
-        .name-input {
-            padding: 10px;
-            border: 2px solid #2c2b2b;
-            border-radius: 30px;
-            font-size: 16px;
-            background-color: #f3e011;
-            color: #131212;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-            border: 1px solid #004d00;
-        }
-
-        h2 {
-            color: rgb(255, 255, 255);
-            font-size: 28px;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
-        .order-form {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-
-        label {
-            flex-basis: 75%;
-            text-align: right;
-            margin: 5px 0;
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        input[type="number"], input[type="text"] {
-            flex-basis: 50%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-align: center;
-            margin: 5px 0;
-            font-size: 22px;
-            background: #fff9e8;
-            color: #2c2b2b;
-        }
-
-        button {
-            padding: 10px 15px;
-            margin: 5px 0;
-            background-color: #793305;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .note {
-            font-size: 20px;
-            color: rgb(245, 241, 7);
-            text-align: center;
-            margin-top: 20px;
-            border: 2px solid blue;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: center;
-            font-size: 22px;
-        }
-        th {
-            background-color: rgba(46, 45, 45, 0.8);
-        }
-
-        #ordersSection, #individualOrdersSection {
-            display: none;
-        }
-
-        #clearAllOrdersButton {
-            background-color: #ff0000;
-            color: rgb(245, 241, 7);
-            border: 2px solid #8b0000;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-        }
-        #clearAllOrdersButton:hover {
-            background-color: #ff4d4d;
-        }
-
-        footer {
-            margin-top: 20px;
-            text-align: right;
-        }
-
-        /* Spinner styles */
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #008000;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 30px auto;
-            display: none;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg);}
-            100% {transform: rotate(360deg);}
-        }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            padding-top: 120px;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.3);
-        }
-        .modal-content {
-            background-color: #fff;
-            margin: auto;
-            padding: 25px 15px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            text-align: center;
-            color: #333;
-            border-radius: 12px;
-        }
-        .close-modal {
-            color: #aaa;
-            float: left;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .order-form {
-                flex-direction: column;
-                gap: 0;
-            }
-            label, input[type="number"], input[type="text"] {
-                flex-basis: 100%;
-                font-size: 18px;
-            }
-            h1, h2 {
-                font-size: 22px;
-            }
-            .logo {
-                width: 60px;
-            }
-            th, td {
-                font-size: 16px;
-            }
-            button {
-                font-size: 16px;
-            }
-        }
-    </style>
-    <script type="module" src="app.js"></script>
+    <title>Fattarney</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
     <header>
+        <div class="header-title-container">
+            <h1 class="main-title">🍟 BESMELLA 🍟</h1>
+        </div>
         <img src="60.png" alt="لوجو الشركة" class="logo">
-        <h1>🍔فطار أونلاين🍔</h1>
     </header>
 
-    <div class="name-section">
-        <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required>
-    </div>
-        
-    <h2>أصناف الطلب</h2>
-    
-    <div class="order-form">
-        <label for="foulInput">فول
-            <img src="فول.jfif" alt="فول" style="width: 70px; height: 35px;">
-        </label>
-        <input id="foulInput" type="number" min="0" value="0">
-
-        <label for="ta3miyaInput">طعمية
-            <img src="طعمية2.jpg" alt="طعمية" style="width: 70px; height: 35px;">
-        </label>
-        <input id="ta3miyaInput" type="number" min="0" value="0">
-
-        <label for="batatisTawabi3Input">بطاطس صوابع
-            <img src="بطاطس صوابع.jfif" alt="بطاطس صوابع" style="width: 70px; height: 35px;">
-        </label>
-        <input id="batatisTawabi3Input" type="number" min="0" value="0">
-
-        <label for="batatisShibsyInput">بطاطس شيبسي
-            <img src="بطاطس شيبسي.jpg" alt="بطاطس شيبسي" style="width: 70px; height: 35px;">
-        </label>
-        <input id="batatisShibsyInput" type="number" min="0" value="0">
-
-        <label for="ta3miyaMahshyInput">طعمية محشية
-            <img src="طعمية محشية.jpg" alt="طعمية محشية" style="width: 70px; height: 35px;">
-        </label>
-        <input id="ta3miyaMahshyInput" type="number" min="0" value="0">
-
-        <label for="batatisMahrousaInput">بطاطس مهروسة
-            <img src="بطاطس مهروسة.jfif" alt="بطاطس مهروسة" style="width: 70px; height: 35px;">
-        </label>
-        <input id="batatisMahrousaInput" type="number" min="0" value="0">
-
-        <label for="musaqaBadhinjanInput">مسقعة
-            <img src="مسقعة.jpg" alt="مسقعة" style="width: 70px; height: 35px;">
-        </label>
-        <input id="musaqaBadhinjanInput" type="number" min="0" value="0">
-
-        <label for="makhalilInput">مخلل
-            <img src="مخلل.jpg" alt="مخلل" style="width: 70px; height: 35px;">
-        </label>
-        <input id="makhalilInput" type="number" min="0" value="0">
-    </div>
-
-    <button id="submitOrderButton">إرسال الطلب</button>
-    <button id="viewOrdersButton">عرض الطلب المجمع</button>
-    <button id="viewIndividualOrdersButton">الطلبات الفردية</button>
-
-    <div class="spinner" id="spinner"></div>
-
-    <!-- Modal for user messages -->
-    <div id="modal" class="modal">
+    <!-- شريط المعلومات الثابت أسفل الهيدر مباشرة -->
+    <div id="infoBar" class="info-bar">
+      <div class="info-section currency-section" id="currencySection" title="أسعار العملات">
+        <span class="icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>
+        <span id="currencyLive">جاري التحميل...</span>
+      </div>
+      <div class="info-section weather-section" id="weatherSection" title="طقس القاهرة">
+        <span class="icon"><i class="fa-solid fa-cloud-sun"></i></span>
+        <span id="weatherLive">جاري التحميل...</span>
+      </div>
+      <!-- تم تعطيل ظهور مواقيت الصلاة عبر إخفاء القسم التالي -->
+      <div class="info-section prayer-section" id="prayerSection" title="مواقيت الصلاة" style="display:none;">
+        <span class="icon"><i class="fa-solid fa-mosque"></i></span>
+        <span id="prayerLive">جاري التحميل...</span>
+      </div>
+      <!-- نافذة العد التنازلي للصلاة تظهر عند الضغط -->
+      <div id="prayerCountdownModal" class="countdown-modal" style="display:none;">
         <div class="modal-content">
-            <span class="close-modal" id="closeModalBtn">&times;</span>
-            <p id="modalMessage"></p>
+          <span id="closeCountdownModal" class="close-btn">&times;</span>
+          <h3>العد التنازلي لأقرب صلاة</h3>
+          <div id="nextPrayerName"></div>
+          <div id="nextPrayerTime"></div>
+          <div id="prayerCountdown"></div>
         </div>
+      </div>
     </div>
     
-    <div id="ordersSection">
-        <h2>الطلب المجمع</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>الصنف</th>
-                    <th>الكمية</th>
-                </tr>
-            </thead>
-            <tbody id="ordersTableBody"></tbody>
-        </table>
-        <h2>أسماء الأشخاص اللي هيفطروا</h2>
-        <div id="usersOutput"></div>
-    </div>
+    <main>
+        <section class="order-section">
+            <div class="name-section">
+                <input id="nameInput" class="name-input" type="text" placeholder="أدخل الإسم هنا" required autocomplete="off">
+                <div id="nameRequiredMsg">يجب إدخال الاسم أولاً!</div>
+                <!-- زر اختيار عدة أصناف دفعة واحدة بعد الاسم مباشرة -->
+                <button type="button" id="showMultiSelectBtn" class="multi-select-primary-btn">
+                    اختيار عدة أصناف دفعة واحدة
+                </button>
+            </div>
+            <form id="orderForm" class="order-form" autocomplete="off">
+                <div class="item-box">
+                    <div style="font-weight:bold; margin-bottom:6px; color:#444; font-size:16px;">
+                        أو اختيار صنف واحد
+                    </div>
+                    <select id="itemSelect" class="item-select" required>
+                        <!-- الأصناف ستملأ ديناميكياً من app.js -->
+                    </select>
+                    <label for="quantityInput">الكمية</label>
+                    <input id="quantityInput" class="quantity-input" type="number" min="1" value="" required>
+                    <div id="unitPriceHint" class="unit-price-hint"></div>
+                    <button type="button" id="addItemButton">إضافة الصنف للطلب</button>
+                </div>
+            </form>
 
-    <div id="individualOrdersSection">
-        <h2>الطلبات الفردية</h2>
-        <div id="individualOrdersOutput"></div>
-    </div>
+            <!-- واجهة الاختيار المتعدد -->
+            <div id="multiSelectSection" style="display:none;">
+                <h3>اختيار عدة أصناف وكمية كل صنف</h3>
+                <form id="multiSelectForm">
+                    <table class="multi-items-table">
+                        <thead>
+                            <tr>
+                                <th>الصنف</th>
+                                <th>الكمية</th>
+                                <th>سعر الوحدة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="multiSelectItems"></tbody>
+                    </table>
+                    <button type="button" id="addMultiItemsButton">إضافة جميع الأصناف للطلب</button>
+                    <button type="button" id="cancelMultiSelectBtn">إلغاء</button>
+                </form>
+            </div>
+
+            <div id="orderSummary" class="order-summary" style="display:none;">
+                <h2>ملخص الطلب</h2>
+                <table id="summaryTable">
+                    <thead>
+                        <tr>
+                            <th>الصنف</th>
+                            <th>الكمية</th>
+                            <th>سعر الوحدة</th>
+                            <th>الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summaryList"></tbody>
+                </table>
+                <div class="total-row">
+                    <span>إجمالي قيمة الطلب (بدون خدمة/توصيل): </span>
+                    <span id="orderTotal" style="font-weight:bold"></span> <span>جنيه</span>
+                </div>
+                <button id="editSummaryButton" type="button">تعديل</button>
+                <button id="confirmOrderButton" type="button">تأكيد الطلب</button>
+            </div>
+            <div id="currentOrder" class="current-order" style="display:none;">
+                <h2>الأصناف المختارة</h2>
+                <ul id="orderItemsList"></ul>
+                <button id="submitOrderButton" type="button">ملخص الطلب</button>
+            </div>
+        </section>
+        
+        <section class="orders-view-section">
+            <button id="viewOrdersButton">عرض الطلب المجمع</button>
+            <button id="viewIndividualOrdersButton">الطلبات الفردية</button>
+            <button id="exportExcelButton" style="margin:12px 0 8px 0; background:#1177dd; color:#fff; border-radius:12px; font-size:17px; padding:10px 22px; border:none; cursor:pointer;">
+                 Send To Excel
+            </button>
+        </section>
+        
+        <section id="ordersSection" style="display:none;">
+            <h2>الطلب المجمع</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الصنف</th>
+                        <th>الكمية</th>
+                        <th>سعر الوحدة</th>
+                        <th>القيمة</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTableBody"></tbody>
+            </table>
+            <h2>أسماء من قام بالطلب</h2>
+            <div id="usersOutput"></div>
+        </section>
+        
+        <section id="individualOrdersSection" style="display:none;">
+            <h2>الطلبات الفردية</h2>
+            <div id="individualOrdersOutput"></div>
+        </section>
+
+        <!-- أزرار ونافذة دخول الأدمن وإضافة صنف جديد -->
+        <section id="adminSection" style="margin-top:30px;">
+            <button id="adminLoginBtn" style="display:inline-block;">تسجيل دخول الأدمن</button>
+            <button id="adminLogoutBtn" style="display:none;">تسجيل الخروج</button>
+            <button id="openAddItemModal" style="display:none;">إضافة صنف جديد</button>
+            <button id="editItemsBtn" style="display:none;">تعديل الأصناف</button>
+            <button id="clearAllOrdersButton" style="display:none;">مسح يدوي لكل الطلبات</button>
+            <button id="deleteOldOrdersBtn" style="display:none;background:#f5e609;color:#3b0101;padding:6px 18px;border:none;border-radius:15px;margin:3px 0 3px 8px;cursor:pointer;">
+                مسح الطلبات السابقة
+            </button>
+        </section>
+
+        <!-- نافذة تسجيل دخول الأدمن -->
+        <div id="adminLoginModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.33);z-index:1001;justify-content:center;align-items:center;">
+          <div style="background:#fff;padding:20px;border-radius:8px;max-width:320px;">
+            <h3>دخول الأدمن</h3>
+            <input type="email" id="adminEmail" placeholder="الإيميل" style="width:100%;margin-bottom:7px;">
+            <input type="password" id="adminPassword" placeholder="كلمة السر" style="width:100%;margin-bottom:7px;">
+            <div id="adminLoginMsg" style="color:red;min-height:18px;margin-bottom:7px;"></div>
+            <button id="adminLoginConfirmBtn">دخول</button>
+            <button id="adminLoginCancelBtn" style="margin-right:10px;">إلغاء</button>
+          </div>
+        </div>
+
+        <!-- نافذة منبثقة لإضافة صنف جديد (للأدمن فقط) -->
+        <div id="addItemModal" style="display:none; position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.33);z-index:1000;justify-content:center;align-items:center;">
+            <div style="background:#fff;padding:24px 18px;border-radius:8px;max-width:320px;box-shadow:0 0 8px #444;">
+                <h3 style="margin-top:0;">إضافة صنف جديد</h3>
+                <label>اسم الصنف:<br><input id="modalItemName" type="text" style="width:100%"></label><br>
+                <label>السعر:<br><input id="modalItemPrice" type="number" min="1" style="width:100%"></label><br>
+                <div style="margin:10px 0;color:red;" id="modalAddItemMsg"></div>
+                <button id="confirmAddItem">تأكيد الإضافة</button>
+                <button id="closeAddItemModal" style="margin-right:10px;">إلغاء</button>
+            </div>
+        </div>
+
+        <!-- نافذة تعديل الأصناف (جديدة) للأدمن -->
+        <div id="itemsEditModal" style="display:none; position:fixed; top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.33);z-index:1002;justify-content:center;align-items:center;">
+          <div style="background:#fff;padding:24px 18px;border-radius:8px;max-width:400px;width:95vw;box-shadow:0 0 8px #444;">
+            <h3 style="margin-top:0;text-align:center;">تعديل أسعار الأصناف</h3>
+            <div id="itemsEditList"></div>
+            <button id="closeItemsEditModal" style="margin-top:10px;">إغلاق</button>
+          </div>
+        </div>
+    </main>
 
     <footer>
-        <span class="note">لابد من مسح البيانات المخزنة اخر كل يوم</span>
-        <button id="clearAllOrdersButton">مسح البيانات المخزنة</button>
-    <footer dir="rtl" style="display: flex; justify-content: center; border-radius: 16px; align-items: center; padding: 0; line-height: 1; text-align: center; background-color: #dee8f0; color: #008042; margin-top: 10px; font-size: 0.8em;">
-    <p>Copyright © 2024 GENIUS Tech Co. All Rights Reserved</p>
-</footer>
+        <div class="copyright">
+            <p>Copyright © 2024 GENIUS Tech All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- يجب وضع سكريبت مكتبة التصدير هنا أولاً -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <!-- سكريبت شريط المعلومات -->
+    <script type="module" src="infoBar.js"></script>
+    <!-- سكريبت التطبيق الأصلي -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
