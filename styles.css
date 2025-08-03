@@ -450,7 +450,7 @@ footer {
         height: 12px;
     }
     #currency-ticker .scroll {
-        animation: scroll-rtl 30s linear infinite; /* إبطاء للموبايل */
+        animation: scroll-rtl 18s linear infinite; /* إبطاء للموبايل */
     }
 }
 
@@ -754,4 +754,5 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
+
 
