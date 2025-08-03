@@ -443,7 +443,7 @@ footer {
         padding: 6px 0;
     }
     #currency-ticker span {
-        margin: 0 15px;
+        margin: 0 30px;
     }
     #currency-ticker img {
         width: 18px;
@@ -754,4 +754,5 @@ footer {
 #viewIndividualOrdersButton:focus {
     background: #b47b09;
 }
+
 
