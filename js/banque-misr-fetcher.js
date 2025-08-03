@@ -20,11 +20,10 @@ class BanqueMisrDailyRates {
     async fetchBanqueMisrRates() {
         try {
             // استخدام proxy service للتغلب على CORS
-            const proxyUrl = 'https://api.allorigins.win/get?url=';
             const response = await fetch('https://vercel-banque-misr-proxy.vercel.app/api/bm');
             const html = await response.text();
-            if (data.contents) {
-                return this.parseBanqueMisrHTML(data.contents);
+            if (html) {
+                return this.parseBanqueMisrHTML(html);
             }
             throw new Error('No Banque Misr data received');
         } catch (error) {
@@ -170,7 +169,4 @@ class BanqueMisrDailyRates {
         console.log('📁 Using cached Banque Misr rates as fallback');
         return this.getSavedRates();
     }
-
 }
-
-
