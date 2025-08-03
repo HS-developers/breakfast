@@ -174,11 +174,13 @@
         </div>
     </footer>
 
-    <!-- يجب وضع سكريبت مكتبة التصدير هنا أولاً -->
-    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
-    <!-- سكريطب شريط العملات -->
-    <script src="infoBar.js"></script>
-    <!-- سكريطب التطبيق الأصلي -->
-    <script type="module" src="app.js"></script>
+    <!-- مكتبة التصدير -->
+<script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+<!-- كلاس جلب أسعار بنك مصر -->
+<script src="js/banque-misr-fetcher.js"></script>
+<!-- شريط أسعار العملات (يستخدم كلاس بنك مصر) -->
+<script src="js/infoBar.js"></script>
+<!-- سكريبت التطبيق الأصلي -->
+<script type="module" src="app.js"></script>
 </body>
 </html>
