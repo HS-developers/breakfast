@@ -63,7 +63,7 @@ async function loadCurrencies() {
     } catch (error) {
         console.error('Error loading currencies:', error);
         
-        // محاولة بديلة مع API آخر مجاني
+        // محاولة بديلة مع API آخر مجاني - جميع العملات كالموقع الأول
         try {
             const fallbackResponse = await fetch('https://open.er-api.com/v6/latest/USD');
             const fallbackData = await fallbackResponse.json();
@@ -73,12 +73,18 @@ async function loadCurrencies() {
                 const eurToEgp = fallbackData.rates.EGP / fallbackData.rates.EUR;
                 const gbpToEgp = fallbackData.rates.EGP / fallbackData.rates.GBP;
                 const sarToEgp = fallbackData.rates.EGP / fallbackData.rates.SAR;
+                const kwdToEgp = fallbackData.rates.EGP / fallbackData.rates.KWD;
+                const aedToEgp = fallbackData.rates.EGP / fallbackData.rates.AED;
+                const qarToEgp = fallbackData.rates.EGP / fallbackData.rates.QAR;
                 
                 const rates = {
                     "الدولار الأمريكي": {rate: usdToEgp, flag: "https://flagcdn.com/us.svg"},
                     "اليورو": {rate: eurToEgp, flag: "https://flagcdn.com/eu.svg"},
                     "الجنيه الإسترليني": {rate: gbpToEgp, flag: "https://flagcdn.com/gb.svg"},
-                    "الريال السعودي": {rate: sarToEgp, flag: "https://flagcdn.com/sa.svg"}
+                    "الريال السعودي": {rate: sarToEgp, flag: "https://flagcdn.com/sa.svg"},
+                    "الدينار الكويتي": {rate: kwdToEgp, flag: "https://flagcdn.com/kw.svg"},
+                    "الدرهم الإماراتي": {rate: aedToEgp, flag: "https://flagcdn.com/ae.svg"},
+                    "الريال القطري": {rate: qarToEgp, flag: "https://flagcdn.com/qa.svg"}
                 };
                 
                 let html = '';
@@ -96,19 +102,10 @@ async function loadCurrencies() {
         } catch (fallbackError) {
             console.error('Fallback API also failed:', fallbackError);
             
-            // عرض أسعار حقيقية متنوعة كحل أخير
+            // عرض رسالة خطأ فقط
             const scrollElement = document.querySelector('#currency-ticker .scroll');
             if (scrollElement) {
-                scrollElement.innerHTML = `
-                    <span class="up">الدولار الأمريكي: 48.50 ج.م <img src="https://flagcdn.com/us.svg" alt="USA"></span>
-                    <span class="up">اليورو: 52.30 ج.م <img src="https://flagcdn.com/eu.svg" alt="EU"></span>
-                    <span class="up">الجنيه الإسترليني: 61.80 ج.م <img src="https://flagcdn.com/gb.svg" alt="UK"></span>
-                    <span class="up">الريال السعودي: 12.90 ج.م <img src="https://flagcdn.com/sa.svg" alt="Saudi Arabia"></span>
-                    <span class="up">الدينار الكويتي: 158.70 ج.م <img src="https://flagcdn.com/kw.svg" alt="Kuwait"></span>
-                    <span class="up">الدرهم الإماراتي: 13.20 ج.م <img src="https://flagcdn.com/ae.svg" alt="UAE"></span>
-                    <span class="up">الريال القطري: 13.30 ج.م <img src="https://flagcdn.com/qa.svg" alt="Qatar"></span>
-                    <span style="color: #ff9800;">* أسعار تقريبية - تعذر الحصول على البيانات المباشرة</span>
-                `;
+                scrollElement.innerHTML = '<span style="color: #ff4444;">تعذر تحميل أسعار العملات حالياً</span>';
             }
         }
     }
@@ -117,7 +114,7 @@ async function loadCurrencies() {
 // تشغيل الشريط
 function initCurrencyTicker() {
     loadCurrencies();
-    setInterval(loadCurrencies, 300000); // تحديث كل 5 دقائق
+    setInterval(loadCurrencies, 28800000); // تحديث كل 8 ساعات (8 * 60 * 60 * 1000 = 28800000 milliseconds)
 
     // إيقاف الحركة عند مرور الماوس
     const ticker = document.getElementById('currency-ticker');
