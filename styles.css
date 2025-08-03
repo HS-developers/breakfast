@@ -82,12 +82,12 @@ header {
     overflow: hidden;
     white-space: nowrap;
     box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+    direction: rtl; /* تغيير الاتجاه لليسار */
 }
 
 #currency-ticker .scroll {
     display: inline-block;
-    padding-left: 100%;
-    animation: scroll 40s linear infinite;
+    animation: scroll-rtl 25s linear infinite; /* تقليل المدة وتغيير الاسم */
 }
 
 #currency-ticker.paused .scroll {
@@ -98,6 +98,7 @@ header {
     display: inline-flex;
     align-items: center;
     margin: 0 30px;
+    direction: rtl; /* المحتوى يبقى عربي */
 }
 
 #currency-ticker img {
@@ -107,9 +108,14 @@ header {
     border: 1px solid #ccc;
 }
 
-@keyframes scroll {
-    0% {transform: translateX(0);}
-    100% {transform: translateX(-100%);}
+/* الأنيميشن الجديد - من اليمين لليسار بدون تأخير */
+@keyframes scroll-rtl {
+    0% {
+        transform: translateX(100%); /* يبدأ من اليمين تماماً */
+    }
+    100% {
+        transform: translateX(-100%); /* ينتهي في اليسار تماماً */
+    }
 }
 
 .up { 
@@ -444,7 +450,7 @@ footer {
         height: 12px;
     }
     #currency-ticker .scroll {
-        animation: scroll 15s linear infinite; /* إبطاء الحركة */
+        animation: scroll-rtl 35s linear infinite; /* إبطاء للموبايل */
     }
 }
 
@@ -510,7 +516,7 @@ footer {
         height: 10px;
     }
     #currency-ticker .scroll {
-        animation: scroll 15s linear infinite; /* إبطاء أكتر */
+        animation: scroll-rtl 45s linear infinite; /* إبطاء أكتر للشاشات الصغيرة */
     }
 }
 
