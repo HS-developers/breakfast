@@ -121,8 +121,8 @@ async function loadCurrenciesFallback() {
 function initCurrencyTicker() {
     loadCurrenciesFromBanqueMisr();
     
-    // تحديث كل 3 ساعات (بنك مصر يحدث عدة مرات يومياً)
-    setInterval(loadCurrenciesFromBanqueMisr, 10800000); // 3 ساعات
+    // تحديث كل 6 ساعات (بنك مصر يحدث عدة مرات يومياً)
+    setInterval(loadCurrenciesFromBanqueMisr, 21600000); // 6 ساعات
 
     // إيقاف الحركة عند مرور الماوس
     const ticker = document.getElementById('currency-ticker');
